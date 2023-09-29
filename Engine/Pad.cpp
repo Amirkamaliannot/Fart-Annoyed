@@ -64,5 +64,23 @@ bool Pad::touchWall(Rect& Wall)
 	return false;
 }
 
+float Pad::get_line_y()
+{
+	return box.get_top();
+}
+float Pad::get_line_left()
+{
+	return box.get_left();
+}
+float Pad::get_line_right()
+{
+	return box.get_right();
+}
+
+float Pad::get_width()
+{
+	return box.get_right() - box.get_left();
+}
+
 
 

@@ -13,11 +13,17 @@ public:
 
 	bool touchWall(Rect& Wall);
 
-	Rect box;
+	float get_line_y();
+	float get_line_left();
+	float get_line_right();
+
+	float get_width();
+
 
 private:
 
 
+	Rect box;
 	float speed = 200;
 	static constexpr float height = 10.0f;
 

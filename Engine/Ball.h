@@ -2,6 +2,7 @@
 #include "Vec2.h"
 #include "Rect.h";
 #include "Graphics.h"
+#include "Pad.h"
 
 
 class Ball {
@@ -15,6 +16,7 @@ public:
 	void draw(Graphics& gfx);
 
 	bool touchWall(Rect& Wall);
+	bool touchPad(Pad& pad);
 
 private:
 
@@ -24,5 +26,5 @@ private:
 
 	Vec2 vel{ -10,-10};
 
-	float speed = 100.0f;
+	float speed = 200.0f;
 };

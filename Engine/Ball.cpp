@@ -45,6 +45,28 @@ bool Ball::touchWall(Rect& Wall)
 	return false;
 }
 
+bool Ball::touchPad(Pad& pad)
+{
+
+	if (
+		box.get_bottom() > pad.get_line_y() && box.get_top() < pad.get_line_y() &&
+		box.get_left() < pad.get_line_right() && box.get_right() > pad.get_line_left()
+		) 
+	{
+
+		float a = (box.get_right() - pad.get_line_left()) / pad.get_width();
+
+		vel.x -= (a-0.5f)*-1;
+		vel.y *= -1;
+
+		box.move(Vec2{ 0.0f, pad.get_line_y() - box.get_bottom() });
+		return true;
+	}
+
+	return false;
+
+
+}
 
 void Ball::update(float DT, Rect& Wall)
 {
