@@ -23,6 +23,10 @@
 #include "Keyboard.h"
 #include "Mouse.h"
 #include "Graphics.h"
+#include "Pad.h"
+#include "FrameTimer.h"
+#include "Rect.h"
+#include "Ball.h"
 
 class Game
 {
@@ -43,4 +47,10 @@ private:
 	/********************************/
 	/*  User Variables              */
 	/********************************/
+
+	FrameTimer FT;
+	
+	Rect wall;
+	Ball ball;
+	Pad pad;
 };

@@ -21,10 +21,13 @@
 #include "MainWindow.h"
 #include "Game.h"
 
-Game::Game( MainWindow& wnd )
+Game::Game(MainWindow& wnd)
 	:
-	wnd( wnd ),
-	gfx( wnd )
+	wnd(wnd),
+	gfx(wnd),
+	wall(Vec2(0,0), Graphics::ScreenWidth, Graphics::ScreenHeight),
+	pad(Graphics::ScreenWidth/2.0f , Graphics::ScreenHeight*0.8f, 100.0f),
+	ball(Vec2(500,500))
 {
 }
 
@@ -38,8 +41,19 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
+	float DT = FT.Mark();
+
+	pad.update(DT,wall, wnd);
+	ball.update(DT, wall);
+	if (ball.touchPad(pad)) {
+		gfx.DrawCircle(400, 400, 30, Color{ 120, 20,20 });
+	
+	};
 }
 
 void Game::ComposeFrame()
 {
+
+	pad.draw(gfx);
+	ball.draw(gfx);
 }
