@@ -17,6 +17,7 @@ public:
 	void draw(Graphics& gfx);
 
 	bool touchWall(Rect& Wall);
+	bool touchGround(Rect& Wall);
 	bool touchPad(Pad& pad);
 	//bool touchBrick(Brick& Brick);
 

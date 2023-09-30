@@ -31,15 +31,19 @@ bool Ball::touchWall(Rect& Wall)
 		vel.y *= -1;
 		touch = true;
 	}
+
+	if (touch) {
+		return true;
+	}
+	return false;
+}
+
+bool Ball::touchGround(Rect& Wall)
+{
+
 	if (box.get_bottom() > Wall.get_bottom())
 	{
 		box.move(Vec2{ 0.0f, Wall.get_bottom() - box.get_bottom() });
-
-		vel.y *= -1;
-		touch = true;
-	}
-
-	if (touch) {
 		return true;
 	}
 	return false;

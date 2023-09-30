@@ -67,13 +67,15 @@ void Game::UpdateModel()
 		}
 		else if(!check_pause()) 
 		{
-
-
 			float DT = FT.Mark();
 
 			pad.update(DT,wall, wnd);
 			ball.update(DT, wall);
 			ball.touchPad(pad);
+
+			if (ball.touchGround(wall)) {
+				loss = true;
+			}
 
 			int win_tmp = true;
 			for (Brick& b : brick_list) {
