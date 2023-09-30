@@ -24,7 +24,7 @@ private:
 
 
 	Rect box;
-	float speed = 200;
+	float speed = 300.0f;
 	static constexpr float height = 10.0f;
 
 };

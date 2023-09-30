@@ -27,6 +27,8 @@
 #include "FrameTimer.h"
 #include "Rect.h"
 #include "Ball.h"
+#include "Brick.h"
+#include <vector>
 
 class Game
 {
@@ -53,4 +55,6 @@ private:
 	Rect wall;
 	Ball ball;
 	Pad pad;
+
+	std::vector <Brick> brick_list;
 };

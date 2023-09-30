@@ -25,10 +25,17 @@ Game::Game(MainWindow& wnd)
 	:
 	wnd(wnd),
 	gfx(wnd),
-	wall(Vec2(0,0), Graphics::ScreenWidth, Graphics::ScreenHeight),
-	pad(Graphics::ScreenWidth/2.0f , Graphics::ScreenHeight*0.8f, 100.0f),
-	ball(Vec2(500,500))
+	wall(Vec2(0, 0), Graphics::ScreenWidth, Graphics::ScreenHeight),
+	pad(Graphics::ScreenWidth / 2.0f, Graphics::ScreenHeight * 0.8f, 100.0f),
+	ball(Vec2(500, 500))
 {
+	Color color_list[4] = { {20,30,140}, {20,130,140} ,{120,30,140},{120,130,140} };
+
+	for (int j = 0; j < 4; j++) {
+		for (int i = 20; i < Graphics::ScreenWidth; i += 60) {
+			brick_list.push_back({ Vec2(i, 25*j +100), 50.0f, 20.0f, color_list[j]});
+		}
+	}
 }
 
 void Game::Go()
@@ -45,15 +52,25 @@ void Game::UpdateModel()
 
 	pad.update(DT,wall, wnd);
 	ball.update(DT, wall);
-	if (ball.touchPad(pad)) {
-		gfx.DrawCircle(400, 400, 30, Color{ 120, 20,20 });
-	
-	};
+	ball.touchPad(pad);
+
+	for (Brick& b : brick_list) {
+
+		b.touchBall(ball);
+	}
 }
 
 void Game::ComposeFrame()
 {
 
+
+
 	pad.draw(gfx);
 	ball.draw(gfx);
+	
+	for (Brick& b : brick_list) {
+
+		b.draw(gfx);
+	}
+	
 }

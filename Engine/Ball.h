@@ -21,12 +21,12 @@ public:
 	//bool touchBrick(Brick& Brick);
 
 	Rect box;
-	Vec2 vel{ -10,-10};
+	Vec2 vel{ -20,-20};
 private:
 
 	static constexpr float size = 20.0f;
 
 
 
-	float speed = 200.0f;
+	float speed = 300.0f;
 };

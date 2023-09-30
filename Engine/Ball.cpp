@@ -56,7 +56,7 @@ bool Ball::touchPad(Pad& pad)
 
 		float a = (box.get_right() - pad.get_line_left() - box.get_half_width()) / pad.get_width();
 
-		vel.x -= (a-0.5f)*-1;
+		vel.x -= (a-0.5f)*-1.5;
 		vel.y *= -1;
 
 		box.move(Vec2{ 0.0f, pad.get_line_y() - box.get_bottom() });
