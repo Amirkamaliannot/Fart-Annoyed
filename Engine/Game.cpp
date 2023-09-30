@@ -104,6 +104,7 @@ bool Game::check_start()
 		SM.show_intro();
 		if (wnd.kbd.KeyIsPressed(VK_RETURN)) {
 			start = true;
+			FT.Mark();
 		}
 	}
 	return start;
@@ -127,6 +128,7 @@ bool Game::check_pause()
 			if (!isPressed_pause) {
 				isPressed_pause = true;
 				pause = false;
+				FT.Mark();
 			}
 		}
 		else {
