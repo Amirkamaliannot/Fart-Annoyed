@@ -25,15 +25,19 @@ Game::Game(MainWindow& wnd)
 	:
 	wnd(wnd),
 	gfx(wnd),
+	SM(gfx),
 	wall(Vec2(0, 0), Graphics::ScreenWidth, Graphics::ScreenHeight),
 	pad(Graphics::ScreenWidth / 2.0f, Graphics::ScreenHeight * 0.8f, 100.0f),
 	ball(Vec2(500, 500))
 {
-	Color color_list[4] = { {20,30,140}, {20,130,140} ,{120,30,140},{120,130,140} };
+	Color color_list[4] = { {20,30,140}, {20,130,10 } ,{120,30,0},{120,130,140} };
+
+	float start_x = (Graphics::ScreenWidth % (int)(brick_width + brick_padd))/2;
 
 	for (int j = 0; j < 4; j++) {
-		for (int i = 20; i < Graphics::ScreenWidth; i += 60) {
-			brick_list.push_back({ Vec2(i, 25*j +100), 50.0f, 20.0f, color_list[j]});
+		for (int i = start_x; i < Graphics::ScreenWidth - brick_width - brick_padd; i += brick_width+brick_padd) {
+
+			brick_list.push_back({ Vec2(i, (brick_height + brick_padd) * j + 100.0f), brick_width, brick_height, color_list[j]});
 		}
 	}
 }
@@ -48,23 +52,42 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
-	float DT = FT.Mark();
 
-	pad.update(DT,wall, wnd);
-	ball.update(DT, wall);
-	ball.touchPad(pad);
+	if (check_start()) {
 
-	for (Brick& b : brick_list) {
+		if (win) 
+		{
+			SM.show_win();
+		}
+		else if(loss) 
+		{
 
-		b.touchBall(ball);
+			SM.show_loss();
+
+		}
+		else if(!check_pause()) 
+		{
+
+
+			float DT = FT.Mark();
+
+			pad.update(DT,wall, wnd);
+			ball.update(DT, wall);
+			ball.touchPad(pad);
+
+			int win_tmp = true;
+			for (Brick& b : brick_list) {
+
+				b.touchBall(ball);
+				if (b.is_active()) {win_tmp = false;}
+			}
+			if (win_tmp) { win = true; }
+		}
 	}
 }
 
 void Game::ComposeFrame()
 {
-
-
-
 	pad.draw(gfx);
 	ball.draw(gfx);
 	
@@ -72,5 +95,45 @@ void Game::ComposeFrame()
 
 		b.draw(gfx);
 	}
-	
+}
+
+
+bool Game::check_start()
+{
+	if (!start) {
+		SM.show_intro();
+		if (wnd.kbd.KeyIsPressed(VK_RETURN)) {
+			start = true;
+		}
+	}
+	return start;
+}
+bool Game::check_pause()
+{
+	if (!pause) {
+		if (wnd.kbd.KeyIsPressed(VK_ESCAPE)) {
+			if (!isPressed_pause) {
+				pause = true;
+				isPressed_pause = true;
+			}
+		}
+		else {
+			isPressed_pause = false;
+		}
+	}
+	else {
+
+		if (wnd.kbd.KeyIsPressed(VK_ESCAPE)) {
+			if (!isPressed_pause) {
+				isPressed_pause = true;
+				pause = false;
+			}
+		}
+		else {
+			isPressed_pause = false;
+		}
+	}
+
+	return pause;
+
 }

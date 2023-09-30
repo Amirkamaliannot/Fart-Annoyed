@@ -33,3 +33,13 @@ bool Brick::touchBall(Ball& ball)
 	}
 	return false;
 }
+
+bool Brick::is_active()
+{
+	return box.is_active();
+}
+
+void Brick::toggle_active()
+{
+	box.toggle_active();
+}

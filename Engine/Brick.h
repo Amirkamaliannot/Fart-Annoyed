@@ -17,9 +17,11 @@ public:
 
 	bool touchBall(Ball& ball);
 
-private:
+	bool is_active();
 
-	bool active = true;
+	void toggle_active();
+
+private:
 
 
 	Rect box;

@@ -50,7 +50,7 @@ private:
 	float half_height;
 	Vec2 center;
 
-	bool active = 1;
+	bool active = true;
 	Color c = {255,255,255};
 
 

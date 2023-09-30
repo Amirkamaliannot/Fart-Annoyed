@@ -29,6 +29,8 @@
 #include "Ball.h"
 #include "Brick.h"
 #include <vector>
+#include "show_message.h"
+
 
 class Game
 {
@@ -43,6 +45,8 @@ private:
 	/********************************/
 	/*  User Functions              */
 	/********************************/
+	bool check_start();
+	bool check_pause();
 private:
 	MainWindow& wnd;
 	Graphics gfx;
@@ -50,11 +54,21 @@ private:
 	/*  User Variables              */
 	/********************************/
 
+	show_message SM;
 	FrameTimer FT;
-	
 	Rect wall;
 	Ball ball;
 	Pad pad;
+
+	bool start = false;
+	bool pause = false;
+	bool isPressed_pause = false;
+	bool win= false;
+	bool loss = false;
+
+	float brick_width = 80.0f;
+	float brick_height= 20.0f;
+	float brick_padd = 10.0f;
 
 	std::vector <Brick> brick_list;
 };
