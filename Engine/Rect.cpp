@@ -102,6 +102,10 @@ float Rect::get_right()
 {
 	return right;
 }
+float Rect::get_half_width()
+{
+	return half_width;
+}
 float Rect::get_top()
 {
 	return top;

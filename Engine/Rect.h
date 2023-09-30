@@ -35,6 +35,8 @@ public:
 	float get_left();
 	float get_right();
 
+	float get_half_width();
+
 private:
 
 	float top;
