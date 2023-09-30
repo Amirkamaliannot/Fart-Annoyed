@@ -23,7 +23,7 @@ public:
 
 	void color(Color new_c);
 
-	bool RectOverlap(Rect rhs);
+	Vec2 RectOverlap(Rect& rhs);
 
 	void draw(Graphics& gfx);
 

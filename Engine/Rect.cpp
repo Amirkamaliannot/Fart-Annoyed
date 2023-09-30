@@ -69,17 +69,49 @@ void Rect::color(Color new_c)
 	c = new_c;
 }
 
-bool Rect::RectOverlap(Rect rhs)
+Vec2 Rect::RectOverlap(Rect& rhs)
 {
 	if (active) {
 
 		bool horizontalOverlap = (left < rhs.right) && (right > rhs.left);
 		bool verticalOverlap = (top < rhs.bottom) && (bottom > rhs.top);
-		return horizontalOverlap && verticalOverlap;
+		if (horizontalOverlap && verticalOverlap) 
+		{
+			float horizontal_left = rhs.right - left;
+			float horizontal_right = right - rhs.left;
+			float vertical_top = rhs.bottom - top ;
+			float vertical_bottom = bottom - rhs.top;
+
+			
+			Vec2 a = { min(horizontal_left, horizontal_right), min(vertical_bottom, vertical_top) };
+
+			float horizontal;
+			if( horizontal_right > horizontal_left){
+			
+				horizontal = -horizontal_left;
+			}
+			else {
+
+				horizontal = horizontal_right;
+			}
+			
+			float vertical;
+			if( vertical_top > vertical_bottom){
+			
+				vertical = vertical_bottom;
+			}
+			else {
+
+				vertical = -vertical_top;
+			}
+
+			return Vec2(horizontal, vertical);
+		};
 	}
 
-	return false;
+	return Vec2(0.0f, 0.0f);
 }
+
 
 void Rect::draw(Graphics& gfx)
 {
